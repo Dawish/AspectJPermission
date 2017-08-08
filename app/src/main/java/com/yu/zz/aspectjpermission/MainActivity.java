@@ -74,13 +74,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*----------------step 4 始----------------------*/
-//    @Permission(Manifest.permission.CALL_PHONE)
+    @Permission(Manifest.permission.CALL_PHONE)
     void onCall() {
         Intent intent = new Intent(Intent.ACTION_CALL);
         Uri data = Uri.parse("tel:" + "10010");
         intent.setData(data);
         startActivity(intent);
-
 
     }
   /*----------------step 4 终----------------------*/

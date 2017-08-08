@@ -28,33 +28,24 @@ public class PermissionAspectj {
         Object targetObject = joinPoint.getTarget();
         if(targetObject instanceof Activity){
             final Activity targetActivity = (Activity) targetObject;
-            new AlertDialog.Builder(targetActivity)
-                    .setTitle("提示")
-                    .setMessage("为了应用可以正常使用，请您点击确认申请权限。")
-                    .setNegativeButton("取消", null)
-                    .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+            MPermissionUtils.requestPermissionsResult(targetActivity, 1, permission.value()
+                    , new MPermissionUtils.OnPermissionListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            MPermissionUtils.requestPermissionsResult(targetActivity, 1, permission.value()
-                                    , new MPermissionUtils.OnPermissionListener() {
-                                        @Override
-                                        public void onPermissionGranted() {
-                                            try {
-                                                joinPoint.proceed();//获得权限，执行原方法
-                                            } catch (Throwable e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onPermissionDenied() {
-                                            MPermissionUtils.showTipsDialog(targetActivity);
-                                        }
-                                    });
+                        public void onPermissionGranted() { //同意
+                            try {
+                                joinPoint.proceed();//获得权限，执行原方法
+                            } catch (Throwable e) {
+                                e.printStackTrace();
+                            }
                         }
-                    })
-                    .create()
-                    .show();
+
+                        @Override
+                        public void onPermissionDenied() {  //拒绝
+                            MPermissionUtils.showTipsDialog(targetActivity);
+                        }
+                    });
+
+
         }
 
     }
