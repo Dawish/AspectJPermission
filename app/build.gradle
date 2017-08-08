@@ -34,6 +34,9 @@ dependencies {
 
     //step 3.1 加入 -----------
     compile project(':lib')
-    compile 'org.aspectj:aspectjrt:1.8.9'
+//    compile 'org.aspectj:aspectjrt:1.8.9'
     // -------step 3.1 加入
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }

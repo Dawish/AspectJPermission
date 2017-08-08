@@ -2,10 +2,12 @@ package com.yu.zz.aspectjpermission;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -68,16 +70,18 @@ public class MainActivity extends AppCompatActivity {
     //LogTest测试代码
     @LogTest
     private void onLog() {
-        Log.e("TAG","原方法执行中");
+        Log.e("TAG", "原方法执行中");
     }
 
     /*----------------step 4 始----------------------*/
-    @Permission(Manifest.permission.CALL_PHONE)
-    void onCall(){
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        Uri data = Uri.parse("tel:" + "110");
+//    @Permission(Manifest.permission.CALL_PHONE)
+    void onCall() {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        Uri data = Uri.parse("tel:" + "10010");
         intent.setData(data);
         startActivity(intent);
+
+
     }
   /*----------------step 4 终----------------------*/
 

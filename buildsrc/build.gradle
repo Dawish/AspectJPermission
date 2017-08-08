@@ -20,8 +20,11 @@ uploadArchives {
         pom.version = '1.0.0'
     }
 }
-
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
 repositories {
     jcenter()
 }
+
 /*-----------step 2.3 终-------------*/
